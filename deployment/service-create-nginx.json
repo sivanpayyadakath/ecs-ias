@@ -1,10 +1,10 @@
 {
     "cluster": "test",
     "serviceName": "nginx",
-    "taskDefinition": "@@TASKDEFINITION_ARN@@",
+    "taskDefinition": "arn:aws:ecs:ap-northeast-1:414545269625:task-definition/nginx:1",
     "loadBalancers": [
         {
-            "targetGroupArn": "@@TARGET_GROUP_ARN@@",
+            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-northeast-1:414545269625:targetgroup/goals-target-group/7e2806d438bd71b9",
             "containerName": "nginx",
             "containerPort": 80
         }
