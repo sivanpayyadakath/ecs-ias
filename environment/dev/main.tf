@@ -21,6 +21,14 @@ module "ecs" {
   ecs_aws_ami          = var.aws_ecs_ami
 }
 
+module "dns" {
+  source = "../../modules/dns"
+  hosted_zone_domain_name = var.hosted_zone_domain_name
+  subdomain_prefix = var.subdomain_prefix
+  aws_alb_alb_dns_name = module.ecs.aws_alb_alb_dns_name
+  aws_alb_alb_zone_id = module.ecs.aws_alb_alb_zone_id
+}
+
 resource "aws_key_pair" "ecs" {
   key_name   = "ecs-key-${var.environment}"
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtMljjj0Ccxux5Mssqraa/iHHxheW+m0Rh17fbd8t365y9EwBn00DN/0PjdU2CK6bjxwy8BNGXWoUXiSDDtGqRupH6e9J012yE5kxhpXnnkIcLGjkAiflDBVV4sXS4b3a2LSXL5Dyb93N2GdnJ03FJM4qDJ8lfDQxb38eYHytZkmxW14xLoyW5Hbyr3SXhdHC2/ecdp5nLNRwRWiW6g9OA6jTQ3LgeOZoM6dK4ltJUQOakKjiHsE+jvmO0hJYQN7+5gYOw0HHsM+zmATvSipAWzoWBWcmBxAbcdW0R0KvCwjylCyRVbRMRbSZ/c4idZbFLZXRb7ZJkqNJuy99+ld41 ecs@aws.fake"
@@ -66,6 +74,21 @@ variable "instance_type" {
   description = "Size of instances in the ECS cluster."
 }
 
+variable "hosted_zone_domain_name" {
+}
+
+variable "subdomain_prefix" {
+  type = string
+}
+
 output "default_alb_target_group" {
   value = module.ecs.default_alb_target_group
+}
+
+output "aws_alb_alb_dns_name" {
+  value = module.ecs.aws_alb_alb_dns_name
+}
+
+output "aws_alb_alb_zone_id" {
+  value = module.ecs.aws_alb_alb_zone_id
 }

@@ -38,3 +38,7 @@ desired_capacity = 1
 
 # Size of instances in the ECS cluster.
 instance_type = "t2.micro"
+
+hosted_zone_domain_name = "tokyolatte.com"
+
+subdomain_prefix = "sivan"
