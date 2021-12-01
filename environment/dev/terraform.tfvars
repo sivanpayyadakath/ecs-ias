@@ -42,3 +42,5 @@ instance_type = "t2.micro"
 hosted_zone_domain_name = "tokyolatte.com"
 
 subdomain_prefix = "sivan"
+
+certificate_domain_name = "*.tokyolatte.com"

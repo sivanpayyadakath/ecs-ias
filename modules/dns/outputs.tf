@@ -2,9 +2,9 @@
 #   value = data.aws_acm_certificate.global.arn
 # }
 
-# output "aws_acm_certificate-regional-arn" {
-#   value = data.aws_acm_certificate.regional.arn
-# }
+output "aws_acm_certificate_regional_arn" {
+  value = data.aws_acm_certificate.regional.arn
+}
 
 # output "aws_route53_zone-main-name" {
 #   value = aws_route53_zone.main.name

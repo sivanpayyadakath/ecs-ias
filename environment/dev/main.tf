@@ -19,12 +19,14 @@ module "ecs" {
   key_name             = aws_key_pair.ecs.key_name
   instance_type        = var.instance_type
   ecs_aws_ami          = var.aws_ecs_ami
+  aws_acm_certificate_regional_arn = module.dns.aws_acm_certificate_regional_arn
 }
 
 module "dns" {
   source = "../../modules/dns"
   hosted_zone_domain_name = var.hosted_zone_domain_name
   subdomain_prefix = var.subdomain_prefix
+  certificate_domain_name = var.certificate_domain_name
   aws_alb_alb_dns_name = module.ecs.aws_alb_alb_dns_name
   aws_alb_alb_zone_id = module.ecs.aws_alb_alb_zone_id
 }
@@ -81,6 +83,9 @@ variable "subdomain_prefix" {
   type = string
 }
 
+variable "certificate_domain_name"{
+}
+
 output "default_alb_target_group" {
   value = module.ecs.default_alb_target_group
 }
@@ -92,3 +97,7 @@ output "aws_alb_alb_dns_name" {
 output "aws_alb_alb_zone_id" {
   value = module.ecs.aws_alb_alb_zone_id
 }
+
+# output "aws_acm_certificate_regional_arn" {
+#   value = module.dns.aws_acm_certificate_regional_arn
+# }
